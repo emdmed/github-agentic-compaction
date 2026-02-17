@@ -1,5 +1,9 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
 interface CompactionResultProps {
   output: string;
   stats: {
@@ -36,25 +40,36 @@ export default function CompactionResult({ output, stats }: CompactionResultProp
     <div className="w-full space-y-4">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[
-          { label: 'Files', value: formatNumber(stats.files) },
-          { label: 'Original tokens', value: formatNumber(stats.rawTokens) },
-          { label: 'Compacted tokens', value: formatNumber(stats.compactedTokens) },
-          { label: 'Savings', value: `${savings}%` },
+          { label: 'Files Indexed', value: formatNumber(stats.files) },
+          { label: 'Original Tokens', value: formatNumber(stats.rawTokens) },
+          { label: 'Agent Tokens', value: formatNumber(stats.compactedTokens) },
+          { label: 'Token Savings', value: `${savings}%` },
         ].map(({ label, value }) => (
-          <div key={label} className="rounded-lg border border-border bg-card p-3 text-center">
-            <div className="text-lg font-semibold text-card-foreground">{value}</div>
-            <div className="text-xs text-muted-foreground">{label}</div>
-          </div>
+          <Card key={label}>
+            <CardContent className="p-3 text-center">
+              <Badge variant="outline" className="mb-1 text-lg font-semibold">
+                {value}
+              </Badge>
+              <div className="text-xs text-muted-foreground">{label}</div>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
+      <div className="text-sm text-muted-foreground">
+        <p>
+          Your agent can now search this compact index to find relevant files instead of reading the entire codebase.
+          Paste the output into your agentic coding tool&apos;s context.
+        </p>
+      </div>
+
       <div className="flex gap-2">
-        <button onClick={handleCopy} className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent">
+        <Button variant="outline" size="sm" onClick={handleCopy}>
           Copy to clipboard
-        </button>
-        <button onClick={handleDownload} className="rounded-md border border-border px-3 py-1.5 text-xs font-medium hover:bg-accent">
+        </Button>
+        <Button variant="outline" size="sm" onClick={handleDownload}>
           Download .md
-        </button>
+        </Button>
       </div>
 
       <pre className="max-h-[500px] overflow-auto rounded-lg border border-border bg-muted p-4 text-xs leading-relaxed">

@@ -1,18 +1,25 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+
 interface RateLimitDisplayProps {
   remaining: number;
   resetTime: number;
 }
 
 export default function RateLimitDisplay({ remaining, resetTime }: RateLimitDisplayProps) {
-  const minutesLeft = Math.max(0, Math.ceil((resetTime - Date.now()) / 60000));
-  const color = remaining > 20 ? 'text-green-600' : remaining > 5 ? 'text-yellow-600' : 'text-destructive';
+  const color = remaining > 20 ? 'default' : remaining > 5 ? 'secondary' : 'destructive';
 
   return (
-    <p className="text-xs text-muted-foreground">
-      <span className={color}>{remaining}/50</span> requests remaining
-      {remaining < 50 && ` · Resets in ${minutesLeft}m`}
-    </p>
+    <Card>
+      <CardContent className="p-3">
+        <p className="text-xs text-muted-foreground">
+          <Badge variant={color as 'default' | 'secondary' | 'destructive'}>{remaining}/50</Badge>
+          {' '}requests remaining
+          {remaining < 50 && ` · Resets at ${new Date(resetTime).toLocaleTimeString()}`}
+        </p>
+      </CardContent>
+    </Card>
   );
 }
