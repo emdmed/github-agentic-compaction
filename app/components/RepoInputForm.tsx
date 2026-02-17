@@ -12,7 +12,7 @@ interface RepoInputFormProps {
 
 const EXAMPLES = [
   'https://github.com/vercel/next-learn',
-  'https://github.com/sindresorhus/slugify',
+  'https://github.com/vercel/ai',
 ];
 
 export default function RepoInputForm({ onSubmit, isLoading, error }: RepoInputFormProps) {

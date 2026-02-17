@@ -1,7 +1,7 @@
 import { compactFile, estimateTokens, isBabelParseable, isPythonParseable } from 'agentic-compaction';
 import { downloadRepoFiles } from './github';
 
-const MAX_FILES = 200;
+const MAX_FILES = 400;
 
 export interface CompactionResult {
   output: string;
