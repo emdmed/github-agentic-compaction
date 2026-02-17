@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     const errorMap: Record<string, { status: number; error: string }> = {
       REPO_NOT_FOUND: { status: 404, error: 'Repository not found. Is it public?' },
       PRIVATE_REPO: { status: 403, error: 'This app only supports public repositories' },
-      TOO_MANY_FILES: { status: 413, error: 'Repository has too many parseable files (>200). Try a smaller repo.' },
+      TOO_MANY_FILES: { status: 413, error: 'Repository has too many parseable files (>700). Try a smaller repo.' },
       FETCH_ERROR: { status: 502, error: 'Failed to fetch repository. Please try again.' },
     };
 
